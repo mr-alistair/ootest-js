@@ -1,0 +1,71 @@
+<head>
+    <script src="Marker.js"></script>
+    <script src="Player.js"></script>
+    <script src="Game.js"></script>
+    
+    
+</head>
+<script>
+   // g_players = [];
+    //g_players[1] = new Player(1);
+    //g_players[2] = new Player(2);
+    
+    var x_counter = 0;
+	var x_clockstop = 0;
+	var x_playerid = 0;
+    var x_logstring = "";
+    var x_gameover = false;
+    var xx_counter = 0;
+    var yy_counter = 0;
+    var zz_temp = 0;
+    	    
+	var thisGame = new Game();
+
+	for (x_counter = 1; x_counter <= 1000; ++x_counter)
+	{
+        
+        x_logstring = "------------------------------------------------------------ " + x_counter;
+		        
+        thisGame.g_logmove(x_logstring);
+
+		thisGame.g_logmove("Game Move: " + x_counter + "<br>");
+		                          
+		x_playerid = thisGame.g_get_playerturn();
+		   
+        x_gameover = thisGame.g_player_action(x_playerid);
+        
+        for( xx_counter = 1 ; xx_counter <=2 ; xx_counter++ )
+        {
+            for( yy_counter = 1 ; yy_counter<=4; yy_counter++ )
+            {
+
+                zz_temp = thisGame.g_players[xx_counter].p_pieces[yy_counter].m_get_location();
+
+                document.write("Player " + xx_counter + " Marker " + yy_counter + " Position " + zz_temp + "<br>");
+
+            }
+
+        }
+
+        document.write("<br>");
+
+
+		if (x_gameover ) {
+
+		    x_clockstop = x_counter;
+		    x_counter = 9999999;
+
+		}
+
+		thisGame.g_flip_player();
+
+		
+	}
+
+	thisGame.g_displaylog();
+
+	document.write("<br>FINAL MOVE: " + x_clockstop + "<br>");
+
+</script>
+
+</html>
